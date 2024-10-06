@@ -52,17 +52,6 @@ class SimpleBot:
         stream=False
     ):
         token_ceiling = 4096
-# =============================================================================
-#         if self.model == "gpt-4":
-#             max_tokens = 8000
-#             token_ceiling = 8000
-#         if self.model == "gpt-3.5-turbo-16k" or self.model == "gpt-3.5-turbo-0125" or self.model == "gpt-3.5-turbo-1106":
-#             max_tokens = 16000
-#             token_ceiling = 16000
-#         if self.model == "gpt-4-turbo-preview":
-#             max_tokens = 100000
-#             token_ceiling = 100000
-# =============================================================================
     
         tokens_used = sum([self.count_tokens(msg["content"]) for msg in messages])
         tokens_available = token_ceiling - tokens_used
@@ -82,6 +71,7 @@ class SimpleBot:
         while retries < max_retries:
             
             try:
+                
                 completion_params = {
                     "model": self.model,
                     "messages": messages,
@@ -92,10 +82,10 @@ class SimpleBot:
                     "stream": stream
                 }
                 if function_desc is not None:
-                    completion_params["functions"] = function_desc
+                    completion_params["tools"] = function_desc
     
                 completion = self.client.chat.completions.create(**completion_params)
-    
+                
                 response = completion
                 return response
             except Exception as e:
@@ -111,13 +101,11 @@ class SimpleBot:
 
 
     def smart_agent(self):
-        self.model = "gpt-4"
+        self.model = "gpt-4o"
 
     def fast_agent(self):
-        self.model = "gpt-3.5-turbo-0125"
+        self.model = "gpt-4o-mini"
         
-    def long_agent(self):
-        self.model = "gpt-3.5-turbo-16k"
 
     def add_primer(self, primer_text):
         self.primer.append({"role": "user", "content": primer_text})
