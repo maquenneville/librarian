@@ -10,7 +10,7 @@
 - **Word Count Calculation**: Calculate and update word counts for each section of a book.
 - **Comprehensive Summarization**: Create a summary of an entire book using recursive summarization techniques.
 - **Database Exploration**: Generate detailed reports of the library database, including table structures and relationships.
-- **Adaptive Response**: Switch between fast responses using GPT-3.5 Turbo and more sophisticated responses using GPT-4.
+- **Adaptive Response**: Switch between fast responses using GPT-4o Mini and more sophisticated responses using GPT-4o.
 
 ## Prerequisites
 
